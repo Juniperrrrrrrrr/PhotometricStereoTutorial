@@ -115,12 +115,17 @@ def disp_normalmap(normal=None, height=None, width=None, delay=0, name=None):
     N = np.reshape(normal, (height, width, 3))  # Reshape to image coordinates
     N[:, :, 0], N[:, :, 2] = N[:, :, 2], N[:, :, 0].copy()  # Swap RGB <-> BGR
     N = (N + 1.0) / 2.0  # Rescale
-    if name is None:
-        name = 'normal map'
-    cv2.imshow(name, N)
-    cv2.waitKey(delay)
-    cv2.destroyWindow(name)
-    cv2.waitKey(1)    # to deal with frozen window...
+    
+    N = (N * 255).astype(np.uint8)
+    
+    cv2.imwrite("normal_map.png", N)
+
+    # if name is None:
+    #     name = 'normal map'
+    # cv2.imshow(name, N)
+    # cv2.waitKey(delay)
+    # cv2.destroyWindow(name)
+    # cv2.waitKey(1)    # to deal with frozen window...
 
 
 def save_normalmap_as_npy(filename=None, normal=None, height=None, width=None):

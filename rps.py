@@ -102,13 +102,15 @@ class PS(object):
         # Please write your code here to solve the surface normal N whose size is (p, 3) as discussed in the tutorial
 
         # Step 1: solve Ax = b
+        L_transpose = self.L.T
+        self.N, _, _, _ = np.linalg.lstsq(L_transpose, self.M.T, rcond=None)
         # Hint: You can use np.linalg.lstsq(A, b) to solve Ax = b
 
         # self.N = ???
 
         # Step 2: We need to normalize the normal vectors as the norm of the normal vectors should be 1
         # Hint: You can use function normalize from sklearn.preprocessing
-
+        self.N = normalize(self.N.T, axis=1)
         # self.N = ???
 
 
